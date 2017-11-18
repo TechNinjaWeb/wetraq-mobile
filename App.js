@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, FormLabel, FormInput } from 'react-native-elements'
-
 import {
   Platform,
   StyleSheet,
@@ -11,25 +10,20 @@ import {
 
 import { LoginPage } from './pages/LoginPage';
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
 
 export default class App extends Component<{}> {
   constructor(props)
   {
     super(props);
+    this.state = {...props, username: "", password: ""};
+  }
 
-    this.username;
-    this.password;
+  componentWillMount(){
   }
 
   Login()
   {
-    alert("You are about to sign in with the following credentials:"+
+    console.log("You are about to sign in with the following credentials:"+
       `\nUsername: ${this.username}\n` +
       `Password: ${this.password}`
     );
@@ -43,19 +37,19 @@ export default class App extends Component<{}> {
         />
         <FormLabel>Username</FormLabel>
         <FormInput
-          value={this.username}
-          onChangeText={(text)=>this.username = text}
+          value={this.state.username}
+          onChangeText={(text)=>this.setState({username: text || ""})}
         />
         <FormLabel>Password</FormLabel>
         <FormInput
-          value={this.password}
-          onChangeText={(text)=>this.password = text}
+          value={this.state.password}
+          onChangeText={(text)=>this.setState({password: text || ""})}
         />
         <Button
-          raised
-          icon={{name: 'cached'}}
+          style={{marginTop: 50}}
+          icon={{name: 'person'}}
           title='Login'
-          onPress={this.Login.bind(this)} />
+          onPress={this.Login.bind(this)}/>
       </View>
     );
   }
@@ -65,18 +59,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 3,
     justifyContent: 'center',
-    // alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: 'white',
     marginLeft: 20,
     marginRight: 20,
   },
   logo: {
     marginBottom: 30,
-  },
-  welcome: {
-    alignSelf: 'center',
-    // fontSize: 20,
-    // textAlign: 'center',
-    // margin: 10,
   },
 });

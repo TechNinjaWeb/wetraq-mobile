@@ -9,11 +9,9 @@ import {
 export default class LoginPage extends Component<{}> {
   render() {
     return (
-      <View>
         <Text>
           Login Page!
         </Text>
-      </View>
     );
   }
 }
