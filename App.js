@@ -1,16 +1,15 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
+import { Button, FormLabel, FormInput } from 'react-native-elements'
+
 import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image
 } from 'react-native';
+
+import { LoginPage } from './pages/LoginPage';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -20,18 +19,43 @@ const instructions = Platform.select({
 });
 
 export default class App extends Component<{}> {
+  constructor(props)
+  {
+    super(props);
+
+    this.username;
+    this.password;
+  }
+
+  Login()
+  {
+    alert("You are about to sign in with the following credentials:"+
+      `\nUsername: ${this.username}\n` +
+      `Password: ${this.password}`
+    );
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+        <Image 
+          style={styles.logo}
+          source={require('./assets/WeTraq_logo.png')}
+        />
+        <FormLabel>Username</FormLabel>
+        <FormInput
+          value={this.username}
+          onChangeText={(text)=>this.username = text}
+        />
+        <FormLabel>Password</FormLabel>
+        <FormInput
+          value={this.password}
+          onChangeText={(text)=>this.password = text}
+        />
+        <Button
+          raised
+          icon={{name: 'cached'}}
+          title='Login'
+          onPress={this.Login.bind(this)} />
       </View>
     );
   }
@@ -39,19 +63,20 @@ export default class App extends Component<{}> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 3,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'center',
     backgroundColor: '#F5FCFF',
+    marginLeft: 20,
+    marginRight: 20,
+  },
+  logo: {
+    marginBottom: 30,
   },
   welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    alignSelf: 'center',
+    // fontSize: 20,
+    // textAlign: 'center',
+    // margin: 10,
   },
 });
