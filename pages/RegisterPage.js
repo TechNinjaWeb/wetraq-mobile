@@ -5,42 +5,27 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
+  Link
 } from 'react-native';
-import {
-  Actions,
-} from 'react-native-router-flux';
 
-export default class LoginPage extends Component<{}> {
+import { LoginPage } from './LoginPage';
+
+
+export default class RegisterPage extends Component<{}> {
   constructor(props)
   {
     super(props);
-    this.state = {...props, username: "", password: ""};
+    this.state = {...props, username: "", password: "", confirmation: ""};
+    console.log("Props", props)
   }
 
   componentWillMount(){
-    console.log("Login", this)
   }
 
-  Login()
+  Register()
   {
-    console.log("You are about to sign in with the following credentials:"+
-      `\nUsername: ${this.state.username}\n` +
-      `Password: ${this.state.password}`
-    );
-    // CLEAR VARS
-    this.setState({
-      username: "",
-      password: ""
-    })
-
-    Actions.replace('dashboard', {});
-  }
-
-  NavToRegister()
-  {
-    console.log("Navigating to register");
-    Actions.register();
+    console.log("Register");
   }
 
   render() {
@@ -60,17 +45,16 @@ export default class LoginPage extends Component<{}> {
           value={this.state.password}
           onChangeText={(text)=>this.setState({password: text || ""})}
         />
+        <FormLabel>Confirmation</FormLabel>
+        <FormInput
+          value={this.state.confirmation}
+          onChangeText={(text)=>this.setState({confirmation: text || ""})}
+        />
         <Button
-          raised
+          style={{marginTop: 50}}
           icon={{name: 'person'}}
-          title='Login'
-          onPress={this.Login.bind(this)}/>
-        <Text 
-          style={{marginTop: 20, 
-          textAlign: 'center'}}
-          onPress={this.NavToRegister.bind(this)}>
-            Register
-        </Text>
+          title='Register'
+          onPress={this.Register.bind(this)}/>
       </View>
     );
   }

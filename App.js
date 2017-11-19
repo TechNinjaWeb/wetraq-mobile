@@ -7,8 +7,24 @@ import {
   View,
   Image
 } from 'react-native';
+import {
+  Scene,
+  Router,
+  Actions,
+  Reducer,
+  ActionConst,
+  Overlay,
+  Tabs,
+  Modal,
+  Drawer,
+  Stack,
+  Lightbox,
+} from 'react-native-router-flux';
 
-import { LoginPage } from './pages/LoginPage';
+
+import LoginPage from './pages/LoginPage.js';
+import RegisterPage from './pages/RegisterPage';
+import DashboardPage from './pages/DashboardPage';
 
 
 export default class App extends Component<{}> {
@@ -19,38 +35,18 @@ export default class App extends Component<{}> {
   }
 
   componentWillMount(){
+    console.log("App.js")
   }
 
-  Login()
-  {
-    console.log("You are about to sign in with the following credentials:"+
-      `\nUsername: ${this.username}\n` +
-      `Password: ${this.password}`
-    );
-  }
   render() {
     return (
-      <View style={styles.container}>
-        <Image 
-          style={styles.logo}
-          source={require('./assets/WeTraq_logo.png')}
-        />
-        <FormLabel>Username</FormLabel>
-        <FormInput
-          value={this.state.username}
-          onChangeText={(text)=>this.setState({username: text || ""})}
-        />
-        <FormLabel>Password</FormLabel>
-        <FormInput
-          value={this.state.password}
-          onChangeText={(text)=>this.setState({password: text || ""})}
-        />
-        <Button
-          style={{marginTop: 50}}
-          icon={{name: 'person'}}
-          title='Login'
-          onPress={this.Login.bind(this)}/>
-      </View>
+      <Router>
+        <Stack key="root">
+          <Scene key="login" component={LoginPage} title="Login" initial={true}/>
+          <Scene key="register" component={RegisterPage} title="Register"/>
+          <Scene key="dashboard" component={DashboardPage} title="Dashboard"/>
+        </Stack>
+      </Router>
     );
   }
 }
