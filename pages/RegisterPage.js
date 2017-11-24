@@ -7,7 +7,7 @@ import {
   View,
   Image,
   Link
-} from 'react-native';
+} from 'react-native'; 
 
 import { LoginPage } from './LoginPage';
 
